@@ -8,38 +8,49 @@
             width: 150px;
             height: 150px;
             background-color: pink;
+            transition: 4s;
         }
-        .box.active {
-            background: red;
-        }
+
+            .box.active {
+                background: red;
+                transition: 4s;
+            }
     </style>
 </head>
 <body>
-<div id="app">
-    <div class="box"
-         v-bind:class="active"
-         v-on:mouseenter="showActive"
-         v-on:mouseleave="closeActive">
+    <div id="app">
+        <button class="btn"
+                v-on:click="active='active'">
+            Red
+        </button>
+        <button class="btn"
+                v-on:click="active=''">
+            Pink
+        </button>
+        <div class="box"
+             v-bind:class="active"
+             v-on:mouseenter="showActive"
+             v-on:mouseleave="closeActive">
+        </div>
     </div>
-</div>
-<script src="lib/vue-3.0.4.js"></script>
-<script>
-    const app = {
-        data() {
-            return {
-                active:"",
-            }
-        },
-        methods: {
-            showActive: function() {
-                this.active = "active";
+    <script src="lib/vue-3.0.4.js"></script>
+    <script>
+        const app = {
+            data() {
+                return {
+                    active: "",
+                }
             },
-            closeActive:function() {
-                this.active = "";
+            methods: {
+                showActive: function () {
+                    this.active = "active";
+                },
+                closeActive: function () {
+                    this.active = "";
+                }
             }
         }
-    }
-    Vue.createApp(app).mount("#app");
-</script>
+        Vue.createApp(app).mount("#app");
+    </script>
 </body>
 </html>
