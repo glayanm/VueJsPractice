@@ -31,6 +31,10 @@
         <button class="btn"
                 v-on:click="toggleCircle">
             Toggle Circle
+        </button> 
+        <button class="btn"
+                v-on:click="reset">
+            reset
         </button>
         <div class="box"
              v-bind:class="[active,circle]">
@@ -51,6 +55,10 @@
                 },
                 toggleCircle: function () {
                     this.circle = this.circle === "circle" ? "" : "circle";
+                },
+                reset:function() {
+                    this.circle = "";
+                    this.active = "";
                 }
             }
         }
