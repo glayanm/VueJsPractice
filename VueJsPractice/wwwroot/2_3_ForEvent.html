@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(user,index) in users">
+                {{user.name}} <button v-on:click="showDetail(user.id)">Detail</button>
+            </li>
+        </ul>
+        <div>
+            <p v-html="info"></p>
+            <!--{{info}}-->
+        </div>
+
+        <>
+        <ul>
+            <li v-for="(user,index) in users">
+                {{user.name}} <button v-on:click="showInfo(index)">Detail</button>
+            </li>
+        </ul>
+        <div>
+            {{info}}
+        </div>
+    </div>
+    <script src="lib/vue-3.0.4.js"></script>
+    <script>
+        const app = {
+            data() {
+                return {
+                    info: "",
+                    users: [
+                        {
+                            id: 1,
+                            name: "Tom",
+                            phone: "0900000000",
+                            email: "Tom@gmail.com",
+                        },
+                        {
+                            id: 2,
+                            name: "Ame",
+                            phone: "0977258123",
+                            email: "otonashiame@gmail.com",
+                        },
+                        {
+                            id: 3,
+                            name: "Yuan",
+                            phone: "0978811550",
+                            email: "yuan@toeic.com.tw",
+                        }
+                    ]
+                }
+
+            },
+            methods: {
+                showDetail: function (id) {
+                    var userInfo = this.users.find(p => p.id ===
+                        id);
+                    this.info = `Name : ${userInfo.name} <br\> Phone : ${userInfo.phone} <br\> Email : ${userInfo.email} <br\>`;
+                    //userInfo.name + userInfo.phone + userInfo.email;
+                },
+                showInfo: function (index) {
+                    // Teacher method
+                    let user = this.users[index];
+                    this.info = `${user.name} ,${user.phone} ,${user.email}`;
+
+                },
+            }
+        }
+        Vue.createApp(app).mount("#app");
+    </script>
+</body>
+</html>
