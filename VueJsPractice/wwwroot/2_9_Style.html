@@ -4,20 +4,26 @@
     <meta charset="utf-8" />
     <title></title>
 </head>
-<style></style>
 <body>
     <div id="app">
-
+        <div v-bind:style="styleObj1">Hello Y</div>
     </div>
     <script src="lib/vue-3.0.4.js"></script>
     <script>
         const app = {
             data() {
                 return {
-
+                    styleObj1: {
+                        color: "red",
+                        fontSize: "20px",
+                        fontWeight: "bold",
+                    },
+                   
                 }
             }
         }
+
+
         Vue.createApp(app).mount('#app');
     </script>
 </body>
