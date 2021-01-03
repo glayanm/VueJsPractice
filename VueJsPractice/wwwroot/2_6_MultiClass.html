@@ -15,26 +15,31 @@
                 background: red;
                 transition: 2s;
             }
-
-            .box.circle {
-                border-radius: 50%;
-                transition: 2s;
-            }
+        .box.circle {
+            border-radius: 50%;
+            transition: 2s;
+                           
+        }
     </style>
 </head>
 <body>
     <div id="app">
         <button class="btn"
-                v-on:click="toggleActive">
-            Toggle Red
+                v-on:click="active+=' active'">
+            Red
         </button>
         <button class="btn"
-                v-on:click="toggleCircle">
-            Toggle Circle
+                v-on:click="active+=' circle'">
+            Circle
         </button>
+        <button class="btn"
+                v-on:click="active=''">
+            reset
+        </button> 
         <div class="box"
-             v-bind:class="[active,circle]"
-             >
+             v-bind:class="active"
+             v-on:mouseenter="showActive"
+             v-on:mouseleave="closeActive">
         </div>
     </div>
     <script src="lib/vue-3.0.4.js"></script>
@@ -43,15 +48,14 @@
             data() {
                 return {
                     active: "",
-                    circle: "",
                 }
             },
             methods: {
-                toggleActive: function () {
-                    this.active = this.active === "active"?"":"active";
+                showActive: function () {
+                    this.active = "active";
                 },
-                toggleCircle: function () {
-                    this.circle = this.circle === "circle" ? "" :"circle";
+                closeActive: function () {
+                    this.active = "";
                 }
             }
         }
