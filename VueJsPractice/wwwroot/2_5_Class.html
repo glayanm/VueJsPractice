@@ -15,18 +15,27 @@
                 background: red;
                 transition: 4s;
             }
+        .box.circle {
+            border-radius: 50%;
+            transition: 4s;
+                           
+        }
     </style>
 </head>
 <body>
     <div id="app">
         <button class="btn"
-                v-on:click="active='active'">
+                v-on:click="active+=' active'">
             Red
         </button>
         <button class="btn"
-                v-on:click="active=''">
-            Pink
+                v-on:click="active+=' circle'">
+            Circle
         </button>
+        <button class="btn"
+                v-on:click="active=''">
+            reset
+        </button> 
         <div class="box"
              v-bind:class="active"
              v-on:mouseenter="showActive"
