@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        .box.active {
+            border: red;
+        }
+        .d-flex {
+            display: flex
+        }
+    </style>
+</head>
+<body>
+<div id="app" class="d-flex">
+    <div>
+        <img v-bind:src="`img/${{selected}}.jpg`"/>
+
+    </div>
+    <div class="box active"
+         v-for="(item,index) in pics" :key="index"
+         v-on:clikc="selected = item">
+        <img v-bind:src="`img/${item}.jpg`"/>
+    </div>
+</div>
+    <script src="lib/vue-3.0.4.js"></script>
+    <script>
+        const app = {
+            data() {
+                return {
+                    selected: "",
+                    pics: ["pic1", "pic2", "pic3", "pic4", "pic5"]
+                }
+            }
+        }
+        Vue.createApp(app).mount('#app');
+    </script>
+</body>
+</html>
