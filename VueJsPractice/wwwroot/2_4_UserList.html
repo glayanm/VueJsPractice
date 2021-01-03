@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link href="lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body>
+    <div class="container" id="app">
+        <div class="form-inline py-2">
+            <div class="form-group mr-2">
+                <label for="" class="">姓名：</label>
+                <input type="text" v-model="newName" class="form-control" id="">
+            </div>
+            <div class="form-group mr-2">
+                <label for="" class="">電話：</label>
+                <input type="text" v-model="newPhone" class="form-control" id="">
+            </div>
+            <div class="form-group mr-2">
+                <label for="" class="">水果：</label>
+                <input type="text" v-model="newFruit" class="form-control" id="">
+            </div>
+            <button type="button" class="btn btn-info" @click="addData">新增</button>
+            <button type="button" class="btn btn-danger ml-3" @click="resetStorage">Reset</button>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Fruit</th>
+                    <th>Control</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(user,index) in users" :key="index">
+                    <td>{{user.name}}</td>
+                    <td>{{user.phone}}</td>
+                    <td>{{user.fruit}}</td>
+                    <td>
+                        <button class="btn btn-danger" v-on:click="removeUser(index)">remove</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="lib/vue-3.0.4.js"></script>
+    <script>
+        let localUser = localStorage.getItem("users");
+        let localUsers = localUser == null ? [] : JSON.parse(localUser);
+        const app = {
+            data() {
+                return {
+                    newName: "",
+                    newPhone: "",
+                    newFruit: "",
+                    users: localUsers,
+                }
+            },
+            methods: {
+                addData: function () {
+                    // 插入到陣列前方
+                    //this.users.push({ name: this.newName, phone: this.newPhone, fruit: this.newFruit });
+                    // 插入到陣列後方
+                    this.users.unshift({ name: this.newName, phone: this.newPhone, fruit: this.newFruit });
+                    this.newName = this.newPhone = this.newFruit = "";
+                    localStorage.users = JSON.stringify(this.users);
+                },
+                removeUser: function (index) {
+                    this.users.splice(index, 1);
+                    localStorage.users = JSON.stringify(this.users);
+                },
+                resetStorage: function () {
+                    if (confirm("確認清除所有資料?")) {
+                        this.users = [];
+                        localStorage.clear();
+                    }
+                }
+            }
+        }
+
+        Vue.createApp(app).mount("#app");
+    </script>
+</body>
+</html>
