@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>For Class</title>
+    <style>
+        .d-flex {
+            display: flex
+        }
+
+        .box {
+            width: 150px;
+            height: 150px;
+            background-color: pink;
+            transition: 2s;
+            margin: 10px;
+        }
+
+            .box.active {
+                background: red;
+                transition: 2s;
+            }
+    </style>
+</head>
+<body>
+    <div id="app" class="d-flex">
+        <div class="box" v-for="(item,index) in items" :key="index"
+             v-on:click="selected=index"
+             v-bind:class="{active:selected == index}">
+
+        </div>
+    </div>
+    <script src="lib/vue-3.0.4.js"></script>
+    <script>
+        const app = {
+            data() {
+                return {
+                    selected:0,
+                    items: [1, 2, 3, 4, 5],
+                }
+            },
+            methods:
+            {
+
+                            }
+        }
+        Vue.createApp(app).mount('#app');
+    </script>
+</body>
+</html>
