@@ -1,0 +1,27 @@
+﻿
+<div id="demo">
+    <!--Vue Twe way binding-->
+    <input type="text" v-model="message"/>
+    <h1>{{message}}</h1>
+    <h1>{{reverseMessage}}</h1>
+</div>
+
+
+@section Scripts
+{
+    <script>
+        const app = {
+            data() {
+                return {
+                    message: "Hello Vue"
+                }
+            },
+            computed: {
+                reverseMessage() {
+                    return this.message.split('').reverse().join('');
+                }
+            } 
+        }
+        Vue.createApp(app).mount('#demo');
+    </script>
+}

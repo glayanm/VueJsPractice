@@ -1,0 +1,40 @@
+﻿
+<div id="demo">
+    <!--Vue Twe way binding-->
+    <input type="text" v-model="firstName" placeholder="enter first name" />
+    <input type="text" v-model="lastName" placeholder="enter last name" />
+    <h1>{{firstName +" "+ lastName}}</h1>
+    <h1>{{getFullName}}</h1>
+    <h1>{{fullName}}</h1>
+</div>
+
+
+@section Scripts
+{
+    <script>
+        const app = {
+            data() {
+                return {
+                    firstName: "",
+                    lastName: "",
+                    fullName: ""
+                }
+            },
+            computed: {
+                getFullName() {
+                    return this.firstName + ' ' + this.lastName;
+                }
+            },
+            watch: {
+
+                firstName(val,oldVal) {
+                    this.fullName = val + " " + this.lastName;
+                },
+                lastName(val,oldVal) {
+                    this.fullName = this.firstName + " " + val;
+                }
+            }
+        }
+        Vue.createApp(app).mount('#demo');
+    </script>
+}

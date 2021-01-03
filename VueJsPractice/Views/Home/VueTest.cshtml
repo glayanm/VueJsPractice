@@ -1,0 +1,24 @@
+﻿<div id="demo">
+    <!--Vue Twe way binding-->
+    <input type="text" v-model="message" />
+    <h1>{{message}}</h1>
+    <h1>{{mode +','+message}}</h1>
+    <h1>{{number+100}}</h1>
+    <h1>{{isOk?'Yes':'No'}}</h1>
+</div>
+@section Scripts
+{
+    <script>
+        const app = {
+            data() {
+                return {
+                    message: "Vue Test",
+                    mode: "Hello",
+                    number: 99,
+                    isOk: true
+                }
+            }
+        }
+        Vue.createApp(app).mount('#demo');
+    </script>
+}

@@ -1,0 +1,292 @@
+﻿<style>
+    span {
+        color: red;
+    }
+
+    .wrapper, .first {
+        background-color: aqua
+    }
+
+    .yBox, .second {
+        width: 200px;
+        height: 200px;
+        background-color: red
+    }
+</style>
+<div id="demo">
+    <div>
+        <h3>Index</h3>
+        <button v-on:click="step=1">Ch 1 V-Text</button>
+        <button v-on:click="step=2">Ch 2 V-IF V-SHOW</button>
+        <button v-on:click="step=3">Ch 3 V-ON</button>
+        <button v-on:click="step=4">Ch 4 V-Bind</button>
+        <button v-on:click="step=5">Ch 5 V-Model</button>
+        <button v-on:click="step=6">Ch 6 WORK</button>
+        <br />
+        <button v-on:click="step=7">Ch 7 V-Modifier</button>
+        <button v-on:click="step=8">Ch 8 V-ModifierEvent</button>
+        <button v-on:click="step=9">Ch 9 V-For</button>
+    </div>
+    <div v-show="step==1">
+
+        <hr />
+        <h2> 1 V Text </h2>
+        <hr />
+        <p v-once="messageOnce"></p>
+        <p v-text="message"></p>
+        <p v-html="messageCss"></p>
+        <hr />
+    </div>
+    <div v-show="step==2">
+        <hr />
+        <h2> 2 v-if v-show </h2>
+        <hr />
+        <h1></h1>
+        <button v-on:click="show=!show">Switch show</button>
+        <div v-if="show">我進來了 </div>
+        <div v-else>我又出去了</div>
+        <div v-show="show">你打我阿笨蛋</div>
+        <hr />
+        <h3> 練習 </h3>
+        <input type="text" v-model="Name" />
+        <div v-if="Name==''">
+            <span>
+                你沒有輸入資料
+            </span>
+        </div>
+        <div v-if="Name.length>10">
+            <span>
+                你輸入內容超過10個字元
+            </span>
+        </div>
+    </div>
+    <div v-show="step==3">
+        <hr />
+        <h2> 3 v-on</h2>
+        <hr />
+
+        <button @@click="count++"
+                v-on:mouseenter="count++"
+                v-on:mouseleave="count++">
+            加不用錢
+        </button>
+        <div><span>{{count}}</span></div>
+        <p>搭配Method來做</p>
+        <button @@click="addCount"
+                @@mouseenter="addCount"
+                @@mouseleave="addCount">
+            加不用錢2
+        </button>
+        <button @@click="minusCount"
+                @@mouseenter="minusCount"
+                @@mouseleave="minusCount">
+            Minus
+        </button>
+    </div>
+    <div v-show="step==4">
+        <hr />
+        <h2> 4 v-bind</h2>
+        <hr />
+        <h3 v-bind:title="title">title</h3>
+        <input type="checkbox" v-model="notClick" /> not Click
+        <button class="btn-info"
+                v-bind:disabled="notClick">
+            Button
+        </button>
+    </div>
+    <div v-show="step==5">
+        <hr />
+        <h2> 5 v-model</h2>
+        <hr />
+
+
+        <h4>Check Box 複選(幹這個可以很好用)</h4>
+        <label for="">
+            <input type="checkbox" id="yuan" value="yuan" v-model="checkNames" />
+            yuan
+        </label>
+        <label for="">
+            <input type="checkbox" id="ame" value="ame" v-model="checkNames" />
+            ame
+        </label>
+        <label for="">
+            <input type="checkbox" id="700" value="700" v-model="checkNames" />
+            700
+        </label>
+        <div>{{checkNames}}</div>
+
+        <h4>DropDownList </h4>
+        <select v-model="selected">
+            <option value="Alpha" selected="selected">Alpha</option>
+            <option value="Beta">Beta</option>
+            <option value="gama">Gama</option>
+        </select>
+        <div>{{selected}}</div>
+
+
+    </div>
+    <div v-show="step==6">
+        <hr />
+        <h2> 6 work</h2>
+        <hr />
+
+        <input type="text" v-model="firstNum" />
+        +
+        <input type="text" v-model="secondNum" />
+        <button v-on:click="sum">=</button>
+        <input type="text" v-model="result" />
+
+    </div>
+    <div v-show="step==7">
+        <hr />
+        <h2> 7 V-Modifier</h2>
+        <hr />
+        <h3>延遲執行</h3>
+        <input type="text" v-model.lazy="lazyMessage" />
+        <div>{{lazyMessage}}</div>
+
+        <h3>轉純數字</h3>
+        <input type="number" v-model="age" />
+        <input type="text" v-model.number="age2" />
+        <div>{{typeof(age)}}</div>
+        <div>{{typeof(age2)}}</div>
+
+        <h3>去空白 Trim</h3>
+        <input type="text" v-model="account" />
+        <input type="text" v-model.trim="account2" />
+        <div>[{{account}}]</div>
+        <div>[{{account2}}]</div>
+    </div>
+    <div v-show="step==8">
+        <hr />
+        <h2> 8 V-Modifier</h2>
+        <hr />
+        <h3>.stop 冒泡事件:巢狀結構的Click會由裡到外全部發動</h3>
+        <div class="wrapper" v-on:click="divClick">
+            <!-- 使用stop 可以讓事件不再傳遞出去 -->
+            <button v-on:click.stop="buttonClick">buttonClick</button>
+            <div class="yBox" v-show="boxShow">
+
+            </div>
+        </div>
+        <h3>.prevent 阻止瀏覽器的預設行為</h3>
+        <a v-on:click.prevent="showLink" href="www.google.com">Google</a>
+
+        <h3>.self 只會觸發自己的行為,類似防止冒泡事件</h3>
+        <div class="first" v-on:click.self="firstClick">
+            <div class="second" v-on:click.self="secondClick">
+                <button v-on:click.self="buttonClick">self Click</button>
+            </div>
+        </div>
+
+        <h1>.once 只會觸發一次事件</h1>
+        <button v-on:click.once="onceClick">OnceClick</button>
+    </div>
+    <div v-show="step==9">
+        <hr />
+        <h2> 9 V-For</h2>
+        <hr />
+
+        <h3> v-for 記得要給KEY 不然修改資料有可能會錯誤</h3>
+        <ul>
+            <li v-for="item in fruit" :key="item">{{item}}</li>
+        </ul>
+
+        <h3> v-for index 多取得index</h3>
+        <ul>
+            <li v-for="(item,index) in fruit" :key="index">{{index+1}}:{{item}}</li>
+        </ul>
+
+        <h3> v-for 綁定事件Show Index</h3>
+        <ul>
+            <li v-for="(item,index) in fruit" :key="index"
+                v-on:click="showIndex(index)">{{index+1}}:{{item}}</li>
+        </ul>
+
+        
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <script src="~/lib/vue-3.0.4.js"></script>
+    <script>
+        const app = {
+            data() {
+                return {
+                    step: 9,
+                    // Ch 1
+                    messageOnce: "once",
+                    message: "Hello",
+                    messageCss: "Hello <span>World</span>",
+                    // Ch 2
+                    show: true,
+                    // Ch 3
+                    Name: "",
+                    count: 0,
+                    // CH 4
+                    title: "Title",
+                    notClick: false,
+                    // CH 5
+                    input: "",
+                    checkNames: [],
+                    selected: "",
+                    // CH 6
+                    firstNum: 0,
+                    secondNum: 0,
+                    result: 0,
+                    // CH 7
+                    lazyMessage: "",
+                    age: 0,
+                    age2: 0,
+                    account: "",
+                    account2: "",
+                    // CH 8
+                    boxShow: true,
+                    // CH 9
+                    fruit: ["Apple", "Orange", "Banana", "Peach"]
+                    // CH 10
+                }
+            },
+            methods: {
+                addCount: function() {
+                    this.count += 2;
+                },
+                minusCount: function() {
+                    this.count -= 2;
+                },
+                sum: function() {
+                    this.result = parseFloat(this.firstNum) +
+                        parseFloat(this.secondNum);
+                    this.result = Number(this.firstNum) + Number(this.secondNum);
+                },
+                buttonClick: function() {
+                    console.log("buttonClick");
+                    this.boxShow = !this.boxShow;
+                },
+                divClick: function() {
+                    console.log("divClick");
+                    this.boxShow = false;
+                },
+                showLink: function() {
+                    console.log("google");
+                },
+                firstClick: function() {
+                    console.log("First");
+                },
+                secondClick: function() {
+                    console.log("Second");
+                },
+                onceClick: function() {
+                    console.log("Once");
+                },
+                showIndex: function(index) {
+                    console.log("Index:"+index);
+                },
+            }
+        }
+        
+        Vue.createApp(app).mount('#demo');
+    </script>
+}

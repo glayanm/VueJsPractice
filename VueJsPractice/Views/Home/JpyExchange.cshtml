@@ -1,0 +1,122 @@
+﻿
+<div id="demo">
+    <h2> 1 </h2>
+    <!--Vue Twe way binding-->
+    台幣: <input type="text" v-model="TWD" />
+    <div>
+        JPY : {{ExchangeJPY}}
+    </div>
+    日幣: <input type="text" v-model="JPY" />
+    <div>
+        TWD : {{ExchangeTWD}}
+    </div>
+    <hr />
+    <h2> 2 </h2>
+    @*<p>{{JPY2}} {{TWD2}} {{Temp}}</p>*@
+    <div>
+        日幣: <input type="text" v-model="JPY2" />
+    </div>
+    <div>
+        台幣: <input type="text" v-model="TWD2" />
+    </div>
+
+    <hr />
+    <h2> 3 </h2>
+    <div>
+        日幣: <input type="text" v-model="ExchangeJPY3" />
+    </div>
+    <div>
+        台幣: <input type="text" v-model="ExchangeTWD3" />
+    </div>
+
+    <hr />
+    <h2> 4 </h2>
+    <div>
+        日幣: <input type="text" v-model="ExchangeJPY4" />
+    </div>
+    <div>
+        台幣: <input type="text" v-model="ExchangeTWD4" />
+    </div>
+    <button v-on:click="Exchange">Exchange</button>
+
+</div>
+
+
+@section Scripts
+{
+    <script>
+        const rate = 0.27;
+        const app = {
+            data() {
+                return {
+                    TWD: 0,
+                    JPY: 0,
+                    TWD2: (0).toFixed(2),
+                    JPY2: (0).toFixed(2),
+                    TWD3: (0).toFixed(2),
+                    JPY3: (0).toFixed(2),
+                    TWD4: (0).toFixed(2),
+                    JPY4: (0).toFixed(2),
+                }
+            },
+            computed: {
+                ExchangeJPY() {
+                    return (this.TWD / rate).toFixed(2);
+                },
+                ExchangeTWD() {
+                    return (this.JPY * rate).toFixed(2);
+                },
+                ExchangeTWD3: {
+                    get: function() {
+                        return this.TWD3;
+                    },
+                    set: function(newVal) {
+                        const newJpy = (newVal * rate).toFixed(2);
+                        if (this.JPY3 !== newJpy) {
+                            this.JPY3 = newJpy;
+                            this.TWD3 = newVal;
+                        }
+                    }
+                },
+                ExchangeJPY3: {
+                    get: function() {
+                        return this.JPY3;
+                    },
+                    set: function(newVal) {
+                        const newTwd = (newVal / rate).toFixed(2);
+                        if (this.TWD3 !== newTwd) {
+                            this.TWD3 = newTwd;
+                            this.JPY3 = newVal;
+                        }
+                    }
+                },
+            },
+            watch: {
+                TWD2(val, oldVal) {
+                    if (val !== oldVal) {
+                        var yen = (this.TWD2 / rate).toFixed(2);
+                        if (yen !== this.JPY2) {
+                            this.JPY2 = yen;
+                        }
+                    }
+                },
+                JPY2(val, oldVal) {
+                    if (val !== oldVal) {
+                        var nt = (this.JPY2 * rate).toFixed(2);
+                        if (nt !== this.TWD2) {
+                            this.TWD2 = nt;
+                        }
+                    }
+                }
+
+            },
+            methods: {
+                Exchange: function() {
+
+                }
+            }
+
+        }
+        Vue.createApp(app).mount('#demo');
+    </script>
+}
