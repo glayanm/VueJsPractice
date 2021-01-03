@@ -24,7 +24,8 @@
 </head>
 <body>
     <div id="app" class="d-flex">
-        <div class="box" v-for="(item,index) in items" :key="index"
+        <div class="box" 
+             v-for="(item,index) in items" :key="index"
              v-on:click="selected=index"
              v-bind:class="{active:selected == index}">
 
@@ -35,14 +36,14 @@
         const app = {
             data() {
                 return {
-                    selected:0,
+                    selected: NaN,
                     items: [1, 2, 3, 4, 5],
                 }
             },
             methods:
             {
 
-                            }
+            }
         }
         Vue.createApp(app).mount('#app');
     </script>
