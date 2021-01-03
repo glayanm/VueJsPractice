@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(fruit,index) in products" :key="index">
+                {{fruit.name}},price:{{fruit.price}}
+            </li>
+        </ul>
+        <div>
+            篩選價錢大於:<input type="text" v-model="filterPrice">
+            <input type="button" value="Filter" v-on:click="filterProduct" />
+        </div>
+        <ul>
+            <li v-for="(fruit,index) in filterProducts" :key="index">
+                {{fruit.name}},price:{{fruit.price}}
+            </li>
+        </ul>
+    </div>
+    <script src="lib/vue-3.0.4.js"></script>
+    <script>
+        const app = {
+            data() {
+                return {
+                    filterPrice: 0,
+                    filterProducts: [],
+                    products: [
+                        {
+                            name: "Apple",
+                            price: 20,
+                        },
+                        {
+                            name: "Orange",
+                            price: 30,
+                        },
+                        {
+                            name: "Peach",
+                            price: 80,
+                        },
+                        {
+                            name: "Banana",
+                            price: 99,
+                        },
+                        {
+                            name: "Lemon",
+                            price: 199,
+                        }
+                    ]
+
+                }
+            },
+            methods: {
+                filterProduct: function () {
+                    //const price = this.filterPrice;
+                    this.filterProducts = this.products.filter(p => p.price > this.filterPrice);
+                }
+            }
+        }
+
+        Vue.createApp(app).mount("#app");
+    </script>
+</body>
+</html>
