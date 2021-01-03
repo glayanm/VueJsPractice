@@ -10,18 +10,33 @@
             height: 200px;
             background: blueviolet;
         }
+
+
+        .fade-enter-from, .fade-leave-to {
+            opacity: 0;
+        }
+
+
+        .fade-enter-active, .fade-leave-active {
+            transition: 1s;
+        }
     </style>
 </head>
 <body>
     <div id="app">
-        <button class="btn btn-info" 
-                v-if="show" 
-                @click="show=false"
-                >On</button>
-        <button class="btn btn-dark"
-                v-else 
-                @click="show=true"
-                >Off</button>
+        <!--<transition name="fade" mode="in-out">-->
+        <transition name="fade" mode="out-in">
+            <button class="btn btn-info"
+                    v-if="show"
+                    @click="show=false">
+                On
+            </button>
+            <button class="btn btn-dark"
+                    v-else
+                    @click="show=true">
+                Off
+            </button>
+        </transition>
     </div>
     <script src="lib/vue-3.0.4.js"></script>
     <script>
