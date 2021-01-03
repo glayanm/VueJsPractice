@@ -16,24 +16,30 @@
 </head>
 <body>
     <div id="app">
-        <card title="Vue Title"></card>
-        <card title="Vue SubTitle"></card>
-        <card :title="title3"></card>
+        <card v-for="(user,index) in users" :key="index"
+              :user="user"></card>
     </div>
     <script src="lib/vue-3.0.4.js"></script>
     <script>
         const app = Vue.createApp({
             data() {
                 return {
-                    title3: "Vue title3",
-            }
+                    users: [
+                        {id:1, name: "Ame", email: "otonashiame@gmail.com" },
+                        {id:2, name: "Yuan", email: "yuan@toeic.com.tw" },
+                        {id:3, name: "AI", email: "item@gmail.com" },
+                        ]
+                }
             }
         });
 
         app.component("card",
             {
-                props:["title"],
-                template: `<div class='card'>{{title}}</div>`,
+                props:["user"],
+                template: `<div class='card'>
+                                <h3>{{user.name}}</h3>
+                                <div>email:{{user.email}}</div>
+                            </div>`,
             });
 
         app.mount('#app');
