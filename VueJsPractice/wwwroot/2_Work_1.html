@@ -7,30 +7,40 @@
         .box.active {
             border: red;
         }
+
         .d-flex {
             display: flex
         }
     </style>
 </head>
 <body>
-<div id="app" class="d-flex">
-    <div>
-        <img v-bind:src="`img/${{selected}}.jpg`"/>
+    <div id="app" class="d-flex">
+        <img v-bind:src="selectedSrc" />
 
+
+        <br />
+        <div class="d-flex">
+            <div class="box active"
+                 v-for="(item,index) in pics" :key="index">
+                <img v-bind:src="`img/${item}.jpg`"
+                     v-on:click="selected = item" />
+            </div>
+        </div>
     </div>
-    <div class="box active"
-         v-for="(item,index) in pics" :key="index"
-         v-on:clikc="selected = item">
-        <img v-bind:src="`img/${item}.jpg`"/>
-    </div>
-</div>
     <script src="lib/vue-3.0.4.js"></script>
     <script>
         const app = {
             data() {
                 return {
-                    selected: "",
+                    selected: "pic1",
                     pics: ["pic1", "pic2", "pic3", "pic4", "pic5"]
+                }
+            },
+            computed: {
+                selectedSrc: {
+                    get() {
+                        return `img/${this.selected}.jpg`;
+                    }
                 }
             }
         }
