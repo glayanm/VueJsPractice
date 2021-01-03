@@ -18,10 +18,17 @@
     <div id="app">
         <card title="Vue Title"></card>
         <card title="Vue SubTitle"></card>
+        <card :title="title3"></card>
     </div>
     <script src="lib/vue-3.0.4.js"></script>
     <script>
-        const app = Vue.createApp({});
+        const app = Vue.createApp({
+            data() {
+                return {
+                    title3: "Vue title3",
+            }
+            }
+        });
 
         app.component("card",
             {
