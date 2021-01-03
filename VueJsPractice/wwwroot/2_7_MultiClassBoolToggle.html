@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>2-6 Multi Class Boolean toggle</title>
+    <style>
+        .box {
+            width: 150px;
+            height: 150px;
+            background-color: pink;
+            transition: 2s;
+        }
+
+            .box.active {
+                background: red;
+                transition: 2s;
+            }
+
+            .box.circle {
+                border-radius: 50%;
+                transition: 2s;
+            }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button class="btn"
+                v-on:click="isActive=!isActive">
+            Toggle Red
+        </button>
+        <button class="btn"
+                v-on:click="isCircle =!isCircle">
+            Toggle Circle
+        </button> 
+        <button class="btn"
+                v-on:click="isCircle =isActive=false">
+            Reset
+        </button> 
+               <div class="box"
+             v-bind:class="{active:isActive},{circle:isCircle}">
+        </div>
+    </div>
+    <script src="lib/vue-3.0.4.js"></script>
+    <script>
+        const app = {
+            data() {
+                return {
+                    isActive: false,
+                    isCircle: false,
+                }
+            },
+        }
+        Vue.createApp(app).mount("#app");
+    </script>
+</body>
+</html>
