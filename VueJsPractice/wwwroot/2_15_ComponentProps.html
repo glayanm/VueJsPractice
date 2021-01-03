@@ -16,7 +16,8 @@
 </head>
 <body>
     <div id="app">
-        <card></card>
+        <card title="Vue Title"></card>
+        <card title="Vue SubTitle"></card>
     </div>
     <script src="lib/vue-3.0.4.js"></script>
     <script>
@@ -24,11 +25,12 @@
 
         app.component("card",
             {
-                data() {
-                    return {
-                        title:"Vue Component",
-                    }
-                },
+                //data() {
+                //    return {
+                //        title:"Vue Component",
+                //    }
+                //},
+                props:["title"],
                 template: `<div class='card'>{{title}}</div>`,
             });
 
