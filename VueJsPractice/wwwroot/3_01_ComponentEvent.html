@@ -16,15 +16,17 @@
 </head>
 <body>
     <div id="app">
+        {{totalCount}}
         <card v-for="(user,index) in users" :key="index"
               :user="user"
-              @to-parent="getFromChild"></card>
+              @to-parent="totalCount++"></card>
     </div>
     <script src="lib/vue-3.0.4.js"></script>
     <script>
     const app = Vue.createApp({
         data() {
             return {
+                totalCount:0,
                 users: [
                     {id:1, name: "Ame", email: "otonashiame@gmail.com" },
                     {id:2, name: "Yuan", email: "yuan@toeic.com.tw" },
@@ -51,12 +53,12 @@
                                 <h3>{{user.name}}</h3>
                                 <div>email:{{user.email}}</div>
                                 <button class="" 
-                                    @click="$emit('toParent')"
                                     @click="addCount">Click {{count}}</button>
                             </div>`,
             methods: {
                 addCount: function() {
                     this.count++;
+                    this.$emit('toParent');
                 }
 
             }
