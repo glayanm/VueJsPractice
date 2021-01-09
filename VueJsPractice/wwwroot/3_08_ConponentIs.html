@@ -53,7 +53,17 @@
             });
         app.component("about",
             {
-                template: `<div>about</div>`
+                data() {
+                    return {
+                        count: 0,
+                        dCount:0
+                }
+                },
+                template: `<div>{{dCount}} about {{count}}</div>`,activated() {
+                    this.count++;
+                },deactivated() {
+                    this.dCount++;
+                }
             });
         app.component("shop",
             {

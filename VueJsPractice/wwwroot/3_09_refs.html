@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        .box {
+            width: 200px;
+            height: 150px;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div>{{boxWidth}}</div>
+    <div class="box" ref="box"></div>
+</div>
+    <script src="lib/vue-3.0.4.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    boxWidth: 0,
+            } },
+            mounted() {
+                //this.boxWidth = document.querySelector(".box").clientWidth;
+                this.boxWidth = this.$refs.box.clientWidth;
+            }
+        });
+
+        // Get Width
+        //document.querySelector(".box").clientWidth();
+        app.mount('#app');
+    </script>
+</body>
+</html>
