@@ -39,7 +39,8 @@
             template: `<div class='card'>
                                 <h3>{{user.name}}</h3>
                                 <div>email:{{user.email}}</div>
-                                <button class="">Click</button>
+                                <button class="" 
+                                    @click="$emit('toParent')">Click</button>
                             </div>`,
         });
 
