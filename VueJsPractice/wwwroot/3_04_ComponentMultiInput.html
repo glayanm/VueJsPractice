@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Component Props</title>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="app">
+        <user-input
+            v-model:first-name="firstName"
+            v-model:last-name="lastName"
+        ></user-input>
+        <div>
+            {{firstName}} {{lastName}}
+        </div>
+    </div>
+    <script src="lib/vue-3.0.4.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    firstName: "",
+                    lastName:"",
+                }
+            },
+        });
+
+        app.component("user-input",
+            {
+                data() {
+                    return {
+
+                    }
+                },
+                props: ["firstName","lastName"],
+                template: `<input type="text" :value="firstName"
+                                @input="$emit('update:firstName',
+                                $event.target.value)">
+                            <input type="text" :value="lastName"
+                                @input="$emit('update:lastName',
+                                $event.target.value)">`,
+            });
+
+        app.mount('#app');
+    </script>
+</body>
+</html>
