@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Component Props</title>
+    <style>
+        .card {
+            width: 200px;
+            display: inline-block;
+            padding: 10px;
+            border: 1px solid #aaa;
+            border-radius: 10px;
+            margin: 10px
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        {{totalCount}}
+        <card v-for="(user,index) in users" :key="index"
+              :user="user"
+              @to-parent="totalCount++"></card>
+    </div>
+    <script src="lib/vue-3.0.4.js"></script>
+    <script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                totalCount:0,
+                users: [
+                    {id:1, name: "Ame", email: "otonashiame@gmail.com" },
+                    {id:2, name: "Yuan", email: "yuan@toeic.com.tw" },
+                    {id:3, name: "AI", email: "item@gmail.com" },
+                ]
+            }
+        },
+        methods: {
+            getFromChild: function() {
+                console.log("get");
+            }
+        }
+    });
+
+    app.component("card",
+        {
+            data() {
+                return {
+                    count :0,
+                }
+            },
+            props:["user"],
+            template: `<div class='card'>
+                                <h3>{{user.name}}</h3>
+                                <div>email:{{user.email}}</div>
+                                <button class="" 
+                                    @click="addCount">Click {{count}}</button>
+                            </div>`,
+            methods: {
+                addCount: function() {
+                    this.count++;
+                    this.$emit('toParent');
+                }
+
+            }
+        });
+
+    app.mount('#app');
+    </script>
+</body>
+</html>
