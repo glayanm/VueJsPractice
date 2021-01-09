@@ -17,12 +17,10 @@
 <body>
     <div id="app">
         {{totalCount}}
-        <card :user="users[0]"
-              @to-parent="addTotalCount"></card>
-        <card :user="users[1]"
-              @to-parent="minusTotalCount"></card>
-    
-        </div>
+        <card v-for="(user,index) in users" :key="index"
+              :user="user"
+              @to-parent="totalCount++"></card>
+    </div>
     <script src="lib/vue-3.0.4.js"></script>
     <script>
     const app = Vue.createApp({
@@ -37,12 +35,6 @@
             }
         },
         methods: {
-            addTotalCount:function() {
-                this.totalCount++;
-            },
-            minusTotalCount:function() {
-                this.totalCount--;
-            },
             getFromChild: function() {
                 console.log("get");
             }
