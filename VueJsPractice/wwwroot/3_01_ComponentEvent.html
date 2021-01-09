@@ -30,7 +30,6 @@
                     {id:2, name: "Yuan", email: "yuan@toeic.com.tw" },
                     {id:3, name: "AI", email: "item@gmail.com" },
                 ]
-
             }
         },
         methods: {
@@ -42,13 +41,25 @@
 
     app.component("card",
         {
+            data() {
+                return {
+                    count :0,
+                }
+            },
             props:["user"],
             template: `<div class='card'>
                                 <h3>{{user.name}}</h3>
                                 <div>email:{{user.email}}</div>
                                 <button class="" 
-                                    @click="$emit('toParent')">Click</button>
+                                    @click="$emit('toParent')"
+                                    @click="addCount">Click {{count}}</button>
                             </div>`,
+            methods: {
+                addCount: function() {
+                    this.count++;
+                }
+
+            }
         });
 
     app.mount('#app');
