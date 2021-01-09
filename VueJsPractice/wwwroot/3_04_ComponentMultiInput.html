@@ -8,10 +8,8 @@
 </head>
 <body>
     <div id="app">
-        <user-input
-            v-model:first-name="firstName"
-            v-model:last-name="lastName"
-        ></user-input>
+        <user-input v-model:first-name="firstName"
+                    v-model:last-name="lastName"></user-input>
         <div>
             {{firstName}} {{lastName}}
         </div>
@@ -22,7 +20,7 @@
             data() {
                 return {
                     firstName: "",
-                    lastName:"",
+                    lastName: "",
                 }
             },
         });
@@ -34,13 +32,22 @@
 
                     }
                 },
-                props: ["firstName","lastName"],
+                props: {
+                    firstName: {
+                        default: "",
+                        type: String,
+                    },
+                    lastName: {
+                        default: "",
+                        type: String
+                    }
+                },
                 template: `<input type="text" :value="firstName"
-                                @input="$emit('update:firstName',
-                                $event.target.value)">
-                            <input type="text" :value="lastName"
-                                @input="$emit('update:lastName',
-                                $event.target.value)">`,
+                                    @input="$emit('update:firstName',
+                                    $event.target.value)">
+                                <input type="text" :value="lastName"
+                                    @input="$emit('update:lastName',
+                                    $event.target.value)">`,
             });
 
         app.mount('#app');
