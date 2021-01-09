@@ -13,19 +13,28 @@
                 border: 1px solid #ccc;
                 border-bottom: none;
                 border-radius: 4px 4px 0 0;
-                cursor: pointer
+                cursor: pointer;
+                background: #eee
             }
+
+                .tabs > div.active {
+                    background: #fff;
+                }
     </style>
 </head>
 <body>
     <div id="app">
         <div class="tabs">
             <div v-for="(item,index) in tabs" :key="index"
-                 v-on:click="tab=item">
+                 v-on:click="tab=item"
+                 v-bind:class="{active:tab==item}">
                 {{item}}
             </div>
         </div>
+        <keep-alive>
+
             <component :is="tab"></component>
+        </keep-alive>
     </div>
     <script src="lib/vue-3.0.4.js"></script>
     <script>
@@ -48,7 +57,13 @@
             });
         app.component("shop",
             {
-                template: `<div>shop</div>`
+                data(){return {
+                        count:0
+                    }
+                },
+                template: `<div>
+                                shop <button v-on:click="count++">Click {{count}}</button>
+                            </div>`
             });
 
         app.mount("#app");
