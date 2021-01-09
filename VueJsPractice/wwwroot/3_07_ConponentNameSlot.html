@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        .alert-box {
+            padding: 10px;
+            box-shadow: 0 0 5px #333;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <alert-box title="vue">
+            <template v-slot:header>
+                this H
+            </template>
+            Hello Vue
+            <template v-slot:footer>
+                thisF
+            </template>
+        </alert-box>
+    </div>
+    <script src="lib/vue-3.0.4.js"></script>
+    <script>
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                }
+            },
+        });
+
+        app.component("alert-box",
+            {
+                props: {
+                    title:{default:"",type:String}
+                },
+                template: `<div class="alert-box">
+                                        <slot name="header"></slot>
+                                        <h1>{{title}}</h1>
+                                        <slot></slot>
+                                        <slot name="footer"></slot> 
+                           </div>`
+            });
+
+        app.component("ball",
+            {
+                template:
+                    `<div class="ball"></div>`
+            });
+
+        app.mount('#app');
+    </script>
+</body>
+</html>
