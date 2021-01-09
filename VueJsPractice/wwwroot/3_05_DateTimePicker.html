@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Component Props</title>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="app">
+        <datetime-picker 
+            v-model:date="date"
+            v-model:hour="hour"></datetime-picker>
+        <div>
+            {{date}} {{hour}}
+        </div>
+    </div>
+    <script src="lib/vue-3.0.4.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    date: "2021-01-01",
+                    hour:"00",
+                }
+            },
+        });
+
+        app.component("datetime-picker",
+            {
+                data() {
+                    return {
+
+                    }
+                },
+                props: {
+                    date: {
+                        default: "0000-01-01",
+                        type: String,
+                    },
+                    hour: {
+                        default: "00",
+                        type: String
+                    }
+                },
+                template: `<input type="date" :value="date"
+                                            @input="$emit('update:date',
+                                            $event.target.value)"/>
+                                        <select :value="hour"
+                                            @input="$emit('update:hour',
+                                            $event.target.value)">
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                        </select>`,
+            });
+
+        app.mount('#app');
+    </script>
+</body>
+</html>
