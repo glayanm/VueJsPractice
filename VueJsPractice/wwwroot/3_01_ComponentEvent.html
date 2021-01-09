@@ -17,7 +17,8 @@
 <body>
     <div id="app">
         <card v-for="(user,index) in users" :key="index"
-              :user="user"></card>
+              :user="user"
+              @to-parent="getFromChild"></card>
     </div>
     <script src="lib/vue-3.0.4.js"></script>
     <script>
@@ -29,6 +30,12 @@
                     {id:2, name: "Yuan", email: "yuan@toeic.com.tw" },
                     {id:3, name: "AI", email: "item@gmail.com" },
                 ]
+
+            }
+        },
+        methods: {
+            getFromChild: function() {
+                console.log("get");
             }
         }
     });
